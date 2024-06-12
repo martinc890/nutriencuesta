@@ -1,13 +1,15 @@
 import os
 import tempfile
 from fastapi import FastAPI, Form, HTTPException, Response
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse,StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from matplotlib import pyplot as plt
 from typing import List, Optional
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import base64
+import csv
+
 
 app = FastAPI()
 app.add_middleware(
@@ -50,7 +52,7 @@ async def read_form(
     birth_year: Optional[int] = Form(...),
     gender: Optional[str] = Form(...),
     textura: Optional[str] = Form(...),
-    consistencia: Optional[str] = Form(...),
+    consistencia: Optional[int] = Form(...),
     satisfactionRange: Optional[int] = Form(...),
     satisfactionRange_4: Optional[int] = Form(...),
     satisfactionRange_5: Optional[int] = Form(...),
@@ -154,6 +156,7 @@ def obtener_datos_pregunta2():
     
     respuestas = {"Demasiado": 0, "Mucho": 0, "Poco": 0, "Nada": 0}
     query = "SELECT consistencia FROM encuestas"
+    
 
     with conn.cursor() as cursor:
         cursor.execute(query)
@@ -175,7 +178,7 @@ def generar_grafico_barras_dos(respuestas,etiquetas):
     return fig
 
 @app.get("/graph/pregunta2", response_class=JSONResponse)
-async def get_graph_pregunta1():
+async def get_graph_pregunta2():
     respuestas = obtener_datos_pregunta2()
     etiquetas = list(respuestas.keys())
     imagen_barras = generar_grafico_barras_dos(respuestas,etiquetas)
@@ -351,6 +354,49 @@ async def get_graph_pregunta7():
     return {"imagen_base64_barra_pregunta_siete": imagen_base64_barra_pregunta_siete}
 
 #########################################################################################
+
+
+
+# Agrega esta nueva ruta
+
+@app.get("/download_csv")
+async def download_csv():
+    # Consulta para obtener los datos de la base de datos
+    query = """
+    SELECT edad, genero, textura, consistencia, chocolate, atraccion, expectativa, humedad, sabores, respuesta 
+    FROM encuestas
+    """
+
+    # Ejecutar la consulta y obtener los datos
+    with conn.cursor() as cursor:
+        cursor.execute(query)
+        rows = cursor.fetchall()
+
+    # Crear un archivo temporal para almacenar el archivo CSV
+    with tempfile.NamedTemporaryFile(mode='w', newline='', delete=False) as tmpfile:
+        fieldnames = ["Edad", "Genero", "Textura", "Consistencia", "Chocolate", "Atraccion", "Expectativa", "Humedad", "Sabores", "Respuesta"]
+        writer = csv.DictWriter(tmpfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({
+                "Edad": row[0],
+                "Genero": row[1],
+                "Textura": row[2],
+                "Consistencia": row[3],
+                "Chocolate": row[4],
+                "Atraccion": row[5],
+                "Expectativa": row[6],
+                "Humedad": row[7],
+                "Sabores": row[8],
+                "Respuesta": row[9]
+            })
+
+    # Crear una respuesta de streaming para devolver el archivo CSV
+    def iterfile():
+        with open(tmpfile.name, mode="r") as file:
+            yield from file
+
+    return StreamingResponse(iterfile(), media_type="text/csv", headers={"Content-Disposition": "attachment; filename=encuestas.csv"})
 
 
 
