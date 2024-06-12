@@ -86,7 +86,7 @@ def generar_grafico_barras(respuestas,etiquetas):
     ax.bar(etiquetas, respuestas.values())
     ax.set_xlabel('Respuestas')
     ax.set_ylabel('Cantidad')
-    ax.set_title('Respuestas a la Pregunta 1')
+    ax.set_title('Textura')
     plt.xticks(rotation=45)
     plt.tight_layout()
     return fig
@@ -153,35 +153,38 @@ async def get_graph_pregunta1():
 #########################################################################################
 
 def obtener_datos_pregunta2():
-    
-    respuestas = {"Demasiado": 0, "Mucho": 0, "Poco": 0, "Nada": 0}
     query = "SELECT consistencia FROM encuestas"
-    
+    total_respuestas = 0
+    respuestas_consistencia = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
 
     with conn.cursor() as cursor:
         cursor.execute(query)
         rows = cursor.fetchall()
         for row in rows:
-            if row[0] in respuestas:
-                respuestas[row[0]] += 1
+            if row[0] in respuestas_consistencia:
+                respuestas_consistencia[row[0]] += 1
+                total_respuestas += 1
+    # Imprimir los datos
+    print("Respuestas de consistencia:", respuestas_consistencia)
+    print("Total de respuestas:", total_respuestas)
+    
 
-    return respuestas
 
-def generar_grafico_barras_dos(respuestas,etiquetas):
+   
+    porcentajes_consistencia = {str(key): (value / total_respuestas) * 100 for key, value in respuestas_consistencia.items()}
+    return porcentajes_consistencia
+
+def generar_grafico_torta_dos(porcentajes_consistencia):
     fig, ax = plt.subplots()
-    ax.bar(etiquetas, respuestas.values())
-    ax.set_xlabel('Respuestas')
-    ax.set_ylabel('Cantidad')
-    ax.set_title('Respuestas a la Pregunta 2')
-    plt.xticks(rotation=45)
-    plt.tight_layout()
+    ax.pie(porcentajes_consistencia.values(), labels=porcentajes_consistencia.keys(), autopct='%1.1f%%', startangle=90)
+    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    ax.set_title('Valoración de la consistencia')
     return fig
 
 @app.get("/graph/pregunta2", response_class=JSONResponse)
 async def get_graph_pregunta2():
-    respuestas = obtener_datos_pregunta2()
-    etiquetas = list(respuestas.keys())
-    imagen_barras = generar_grafico_barras_dos(respuestas,etiquetas)
+    porcentajes_consistencia = obtener_datos_pregunta2()
+    imagen_barras = generar_grafico_torta_dos(porcentajes_consistencia)
     
     with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
         imagen_barras.savefig(tmpfile.name, format="png")
