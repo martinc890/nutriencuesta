@@ -34,7 +34,7 @@
     </div>
     <script>
         function actualizarImagen() {
-            fetch('http://localhost:8000/graph/pregunta1') // grafico pregunta 1
+            fetch('https://prueba-form-rho.vercel.app/graph/pregunta1') // grafico pregunta 1
                 .then(response => response.json())
                 .then(data => {
                     const imagenBase64 = data.imagen_base64_barra_pregunta_uno;
@@ -42,7 +42,7 @@
                     imgElement.src = `data:image/png;base64,${imagenBase64}`;
                 })
                 .catch(error => console.error('Error:', error));
-            fetch('http://localhost:8000/graph/pregunta2') // grafico pregunta 2
+            fetch('https://prueba-form-rho.vercel.app/graph/pregunta2') // grafico pregunta 2
                 .then(response => response.json())
                 .then(data => {
                     const imagenBase64 = data.imagen_base64_barra_pregunta_dos;
@@ -50,7 +50,7 @@
                     imgElement.src = `data:image/png;base64,${imagenBase64}`;
                 })
                 .catch(error => console.error('Error:', error));
-            fetch('http://localhost:8000/graph/chocolate') // grafico pregunta 3
+            fetch('https://prueba-form-rho.vercel.app/chocolate') // grafico pregunta 3
                 .then(response => response.json())
                 .then(data => {
                     const imagenBase64 = data.imagen_base64_chocolate;
@@ -58,7 +58,7 @@
                     imgElement.src = `data:image/png;base64,${imagenBase64}`;
                 })
                 .catch(error => console.error('Error:', error));
-            fetch('http://localhost:8000/graph/atraccion') // grafico pregunta 4
+            fetch('https://prueba-form-rho.vercel.app/atraccion') // grafico pregunta 4
                 .then(response => response.json())
                 .then(data => {
                     const imagenBase64 = data.imagen_base64_atraccion;
@@ -66,7 +66,7 @@
                     imgElement.src = `data:image/png;base64,${imagenBase64}`;
                 })
                 .catch(error => console.error('Error:', error));
-            fetch('http://localhost:8000/graph/expectativa') // grafico pregunta 5
+            fetch('https://prueba-form-rho.vercel.app/expectativa') // grafico pregunta 5
                 .then(response => response.json())
                 .then(data => {
                     const imagenBase64 = data.imagen_base64_expectativa;
@@ -74,7 +74,7 @@
                     imgElement.src = `data:image/png;base64,${imagenBase64}`;
                 })
                 .catch(error => console.error('Error:', error));
-            fetch('http://localhost:8000/graph/sabores') // grafico pregunta 7
+            fetch('https://prueba-form-rho.vercel.app/graph/sabores') // grafico pregunta 7
                 .then(response => response.json())
                 .then(data => {
                     const imagenBase64 = data.imagen_base64_barra_pregunta_siete;
