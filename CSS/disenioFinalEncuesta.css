@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap%27%29%3B');
+@import url('https://fonts.googleapis.com/css2?family=Roboto%3Awght%40300&display=swap%27%29%3B');
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+    box-sizing:border-box;
+    background-image: url('https://img.freepik.com/vector-premium/fondo-transparente-galletas-galletas_6997-865.jpg');
+}
+.thank-you-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.thank-you-container h1 {
+    color: #212f3c;
+    margin-bottom: 20px;
+}
+.thank-you-container p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+.thank-you-container .button {
+    margin-top: 20px;
+}
+.thank-you-container .button a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #212f3c;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.thank-you-container .button a:hover {
+    background-color: #1a242f;
+}

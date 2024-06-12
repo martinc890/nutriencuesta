@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Results</title>
+    <link rel="stylesheet" href="/static/paginaResultados.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Survey Results</h1>
+        <button onclick="downloadCSV()">Descargar Resultados en CSV</button>
+        
+        <script>
+            function downloadCSV() {
+                window.location.href = "/download_csv";
+            }
+        </script>
+        <div id="results">
+            <!-- Contenedores para mostrar los gráficos agrupados de a 2 -->
+            <div class="image-pair">
+                <img id="graficoTelarana" src="" alt="Grafico de Telaraña">
+                <img id="graficoPreguntaDos" src="" alt="Grafico de Pregunta 2">
+            </div>
+            <div class="image-pair">
+                <img id="graficoChocolate" src="" alt="Grafico de Chocolate">
+                <img id="graficoAtraccion" src="" alt="Grafico de Atraccion">
+            </div>
+            <div class="image-pair">
+                <img id="graficoExpectativa" src="" alt="Grafico de Expectativa">
+                <img id="graficoSabores" src="" alt="Grafico de Sabores">
+            </div>
+        </div>
+    </div>
+    <script>
+        function actualizarImagen() {
+            fetch('https://prueba-form-rho.vercel.app/graph/pregunta1') // grafico pregunta 1
+                .then(response => response.json())
+                .then(data => {
+                    const imagenBase64 = data.imagen_base64_barra_pregunta_uno;
+                    const imgElement = document.getElementById('graficoTelarana');
+                    imgElement.src = `data:image/png;base64,${imagenBase64}`;
+                })
+                .catch(error => console.error('Error:', error));
+            fetch('https://prueba-form-rho.vercel.app/graph/pregunta2') // grafico pregunta 2
+                .then(response => response.json())
+                .then(data => {
+                    const imagenBase64 = data.imagen_base64_barra_pregunta_dos;
+                    const imgElement = document.getElementById('graficoPreguntaDos');
+                    imgElement.src = `data:image/png;base64,${imagenBase64}`;
+                })
+                .catch(error => console.error('Error:', error));
+            fetch('https://prueba-form-rho.vercel.app/graph/chocolate') // grafico pregunta 3
+                .then(response => response.json())
+                .then(data => {
+                    const imagenBase64 = data.imagen_base64_chocolate;
+                    const imgElement = document.getElementById('graficoChocolate');
+                    imgElement.src = `data:image/png;base64,${imagenBase64}`;
+                })
+                .catch(error => console.error('Error:', error));
+            fetch('https://prueba-form-rho.vercel.app/graph/atraccion') // grafico pregunta 4
+                .then(response => response.json())
+                .then(data => {
+                    const imagenBase64 = data.imagen_base64_atraccion;
+                    const imgElement = document.getElementById('graficoAtraccion');
+                    imgElement.src = `data:image/png;base64,${imagenBase64}`;
+                })
+                .catch(error => console.error('Error:', error));
+            fetch('https://prueba-form-rho.vercel.app/graph/expectativa') // grafico pregunta 5
+                .then(response => response.json())
+                .then(data => {
+                    const imagenBase64 = data.imagen_base64_expectativa;
+                    const imgElement = document.getElementById('graficoExpectativa');
+                    imgElement.src = `data:image/png;base64,${imagenBase64}`;
+                })
+                .catch(error => console.error('Error:', error));
+            fetch('https://prueba-form-rho.vercel.app/graph/sabores') // grafico pregunta 7
+                .then(response => response.json())
+                .then(data => {
+                    const imagenBase64 = data.imagen_base64_barra_pregunta_siete;
+                    const imgElement = document.getElementById('graficoSabores');
+                    imgElement.src = `data:image/png;base64,${imagenBase64}`;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Llama a la función para actualizar la imagen cada 8 segundos
+        setInterval(actualizarImagen, 8000); // 8000 milisegundos = 8 segundos
+    </script>
+</body>
+</html>

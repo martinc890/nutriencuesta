@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/static/disenioPaginaEncuesta.css">
+</head>
+<body>
+    
+    <section class="container"> 
+        <header class="header">
+          <div class="company-name">Integrador InterCarrera</div>
+        </header>
+        <form  method="post" action="/submit">  
+        <h2 class="product-title">Producto #1</h2>
+        <p class="product-description">
+          Descripcion del producto. <br />
+          Descripcion del test.
+        </p>
+      
+        <div class="question-container">
+          <label for="questionInfo" class="question">Informacion Personal:</label>
+          <div class="form-group">
+            <label>  </label>
+            <div class="forms-grupos">
+              <label><b>Edad</b></label>
+              <input type="number" name="birth_year" id="birthYear" placeholder="Ingrese su edad" required>
+            </div>
+            <div class="forms-grupos">
+              <p><b>Género</b></p>
+              <label>
+                  <select name="gender" id="selectGender" class="selectOp" required>
+                      <option disabled selected value>Selecciona tu género</option>
+                      <option value="hombre">Hombre</option>
+                      <option value="mujer">Mujer</option>
+                      <option value="otro">Otro</option>
+                  </select>
+              </label>
+            </div>
+            
+              </label>
+          </div>
+        </div>
+      </div>
+      
+        <div class="question-container">
+          <label for="question1" class="question">Pregunta 1:</label>
+          <div class="form-group">
+            <label>¿Como describirias a la textura de este alimento a simple vista? </label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="textura" id="tex1" value="Esponjoso">
+                <label class="form-check-label" for="tex1">
+                    Esponjoso
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="textura" id="tex2" value="Crujiente">
+                <label class="form-check-label" for="tex2">
+                    Crujiente
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="textura" id="tex3" value="Blando">
+                <label class="form-check-label" for="tex3">
+                    Blando
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="textura" id="tex4" value="Duro">
+                <label class="form-check-label" for="tex4">
+                    Duro
+                </label>
+            </div>
+        </div>
+        </div>
+        <!-- Pregunta 2 -->
+        <div class="question-container">
+            <label for="question2" class="question">Pregunta 2:</label>
+            <div class="forms-grupos">
+              <p><b>¿Sienten que la galletita se desase al comer?</b></p>
+              <input type="range" class="slider" id="satisfactionRange" name="consistencia" min="1" max="5">
+              <div class="d-flex justify-content-between">
+                  <span>Nada</span>
+                  <span class="spanDerecha">Demasiado</span>
+              </div>
+            </div>
+        </div>
+        <!-- Pregunta 3 -->
+        <div class="question-container">
+          <label for="question3" class="question">Pregunta 3:</label>
+          <div class="forms-grupos">
+            <p><b>¿Qué tanto se siente el sabor a chocolate?</b></p>
+            <input type="range" class="slider" id="satisfactionRange" name="satisfactionRange" min="1" max="5">
+            <div class="d-flex justify-content-between">
+                <span>Muy poco</span>
+                <span class="spanDerecha">Mucho</span>
+            </div>
+        </div>
+          </div>
+        
+        <!-- Pregunta 4 -->
+        <div class="question-container">
+            <label for="question4" class="question">Pregunta 4:</label>
+            <div class="forms-grupos">
+              <p><b>¿Les resulta atractivo el producto?</b></p>
+              <input type="range" class="slider" id="satisfactionRange_4" name="satisfactionRange_4" min="1" max="5">
+              <div class="d-flex justify-content-between">
+                  <span>Muy poco</span>
+                  <span class="spanDerecha">Mucho</span>
+              </div>
+            </div>
+        </div>
+        <!-- Pregunta 5 -->
+        <div class="question-container">
+            <label for="question5" class="question">Pregunta 5:</label>
+            <div class="forms-grupos">
+              <p><b>¿El producto cumplió tus expectativas?</b></p>
+              <input type="range" class="slider" id="satisfactionRange_5" name="satisfactionRange_5" min="1" max="5">
+              <div class="d-flex justify-content-between">
+                  <span>Muy poco</span>
+                  <span class="spanDerecha">Mucho</span>
+              </div>
+            </div>
+        </div>
+        <!-- Pregunta 6 -->
+        <div class="question-container">         
+            <div class="question-container">
+                <label for="question6" class="question">Pregunta 6:</label>
+                <div class="form-group">
+                <label>¿El producto te pareció húmedo o seco?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="humedad" id="con1" value="Demasiado">
+                    <label class="form-check-label" for=con1">
+                        Humedo
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="humedad" id="con2" value="Mucho">
+                    <label class="form-check-label" for="con2">
+                        Seco
+                    </label>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pregunta 7 -->
+        <div class="question-container">
+          <label for="question7" class="question">Pregunta 7:</label>
+          <div class="form-group">
+            <label>¿Que sabores percibes en el producto?</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sabores" id="sab1" value="Dulce">
+                <label class="form-check-label" for="sab1">
+                    Dulce
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sabores" id="sab2" value="Amargo">
+                <label class="form-check-label" for="sab2">
+                    Amargo
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sabores" id="sab3" value="Salado">
+                <label class="form-check-label" for="sab3">
+                    Salado
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sabores" id="sab4" value="Acido">
+                <label class="form-check-label" for="sab4">
+                    Acido
+                </label>
+            </div>
+          </div>
+        </div>
+       <!-- Pregunta 8 -->
+      <div class="question-container">
+        <label for="question8" class="question">Pregunta 8:</label>
+        <div class="form-group">
+          <label>¿Que otros sabores percibiste?</label>
+          <!-- Input de texto agregado aquí -->
+          <input type="text" id="respuesta7" name="respuesta7" class="input-texto" placeholder="Escribe tu respuesta aquí">
+        </div>
+      </div>
+      
+      
+      <button type="submit" class="finish-button">Enviar</button>
+        </section>
+      </form>
+      
+      </body>
+      </html>

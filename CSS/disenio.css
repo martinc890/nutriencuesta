@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap%27%29%3B');
+@import url('https://fonts.googleapis.com/css2?family=Roboto%3Awght%40300&display=swap%27%29%3B');
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    background-image: url('https://img.freepik.com/vector-premium/fondo-transparente-galletas-galletas_6997-865.jpg');
+}
+.header{
+    background-color: #46D65B;
+    padding: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Open sans";
+    color: #fff;
+    
+}
+.container-header{
+    margin-left: 20px;
+    font-size: 1.3rem;
+}
+
+.link{
+    margin-right: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.link:hover{
+    background-color: #2A2D2B;
+}
+
+form{
+    margin:  50px auto;
+    background-color: #2E4053;
+    width: 700px;
+    padding: 2.5rem;
+    border-radius: 5px;
+}
+
+.forms-grupos{
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-size: 19px;
+    font-family: 'Roboto';
+    font-weight: 900;
+}
+
+input[type="text"]{
+    margin: 15px 0;
+    font-size: 19px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: #2E4053;
+}
+input[type="email"]{
+    margin: 15px 0;
+    font-size: 19px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: #2E4053;
+}
+input[type="number"]{
+    margin: 15px 0;
+    font-size: 19px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: #2E4053;
+}
+p{
+    font-size: 19px;   
+}
+.selectOp{
+    margin: 15px 0;
+    font-size: 19px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: #2E4053;
+}
+input[type="radio"]{
+    margin-bottom: 15px;
+    font-family: "Roboto";
+    font-weight: 700;
+}
+
+input[type="checkbox"]{
+    margin-bottom: 15px;
+    font-family: "Roboto";
+    font-weight: 700;
+}
+#comentarios{
+    width: 97%;
+    height: 100px;
+    font-size: 1rem;
+    color: #000;
+}
+.button{
+    margin-top: 25px;
+}
+input[type="submit"]{
+    width: 100%;
+    padding: 10px;
+    font-size: 19px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2ECC71;
+    color: #fff;
+    font-family: "Roboto";
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+input[type="submit"]:hover{
+    background-color: #85c1e9;
+}
+.footer{
+    background-color: #212f3c;
+    padding: 3px;
+    bottom: 0;
+    justify-content: space-between;
+    display: flex;
+    
+}
+.container-fot{
+    margin-left: 20px;
+    color: #fff;
+    font-size: 11px;
+    font-family: "Open sans";
+    font-weight: 7000;
+}
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+.slider:hover {
+    opacity: 1;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+.spanDerecha{
+    margin-left: 60%;
+}
+.thank-you-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.thank-you-container h1 {
+    color: #212f3c;
+    margin-bottom: 20px;
+}
+.thank-you-container p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+.thank-you-container .button {
+    margin-top: 20px;
+}
+.thank-you-container .button a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #212f3c;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.thank-you-container .button a:hover {
+    background-color: #1a242f;
+}
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#result {
+    margin-top: 20px;
+}

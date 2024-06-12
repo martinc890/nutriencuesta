@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;  /* Cambiado de height a min-height */
+    color: #333;
+    box-sizing: border-box;
+    background-image: url('https://img.freepik.com/vector-premium/fondo-transparente-galletas-galletas_6997-865.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;  /* Asegurar que la imagen no se repita */
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 1200px;  /* Ajustado a un ancho mayor */
+    overflow: hidden;  /* Asegurar que el contenido no se desborde */
+}
+
+h1 {
+    text-align: center;
+}
+
+#results {
+    margin-top: 20px;
+}
+
+.image-pair {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;  /* Ajustado para un espacio entre los elementos */
+    margin-bottom: 20px;
+}
+
+.grafico {
+    margin: 10px;
+    width: calc(50% - 20px);  /* Ajuste del tamaño para un buen margen */
+    border: 1px solid #ddd;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
