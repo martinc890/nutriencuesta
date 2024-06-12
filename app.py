@@ -217,7 +217,7 @@ def generar_grafico_torta_chocolate(porcentajes_chocolate):
     ax.set_title('Valoración del Chocolate')
     return fig
 
-@app.get("/graph/chocolate", response_class=JSONResponse)
+@app.get("/chocolate", response_class=JSONResponse)
 async def get_graph_chocolate():
     porcentajes_chocolate = obtener_datos_chocolate()
     imagen_torta_chocolate = generar_grafico_torta_chocolate(porcentajes_chocolate)
@@ -257,7 +257,7 @@ def generar_grafico_torta_atraccion(porcentajes_atraccion):
     ax.set_title('Valoración de la atraccion')
     return fig
 
-@app.get("/graph/atraccion", response_class=JSONResponse)
+@app.get("/atraccion", response_class=JSONResponse)
 async def get_graph_atraccion():
     porcentajes_atraccion = obtener_datos_atraccion()
     imagen_torta_atraccion = generar_grafico_torta_atraccion(porcentajes_atraccion)
@@ -298,7 +298,7 @@ def generar_grafico_torta_expectativa(porcentajes_expectativa):
     ax.set_title('Valoración de las Expectativas')
     return fig
 
-@app.get("/graph/expectativa", response_class=JSONResponse)
+@app.get("/expectativa", response_class=JSONResponse)
 async def get_graph_expectativa():
     porcentajes_expectativa = obtener_datos_expectativa()
     imagen_torta_expectativa = generar_grafico_torta_expectativa(porcentajes_expectativa)
