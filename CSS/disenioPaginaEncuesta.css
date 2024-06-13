@@ -134,7 +134,34 @@ form{
   .header img {
     max-width: 15%; /* Imagen un poco más grande */
   }
+  
+  .slider {
+    width: 100%;
+  }
+  .d-flex {
+    justify-content: space-between;
+  }
+  .spanDerecha {
+    margin-left: 0;
+    text-align: right;
+    flex: 1;
+  }
 }
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;  
+}
+  .slider {
+    width: 100%;
+  }
+  .accent {
+    accent-color: rgb(114, 59, 8);;
+  }
+  .spanDerecha {
+    text-align: right;
+  }
   .container {
     width: calc(100% - 24px);
     padding: 12px;
