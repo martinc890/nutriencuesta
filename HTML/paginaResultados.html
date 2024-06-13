@@ -138,15 +138,13 @@
         </script>
         <div id="results" class="cont-resultados">
             <div class="cont-botones">
-                <button  id="mostrarTelaranaBtn">Mostrar Telaraña</button>
-                <button  id="mostrarPreguntaDosBtn">Mostrar Pregunta 2</button>
+                <button  id="mostrarTelaranaBtn">Mostrar Textura</button>
                 <button  id="mostrarChocolateBtn">Mostrar Chocolate</button>
                 <button id="mostrarAtraccionBtn">Mostrar Atracción</button>
                 <button  id="mostrarExpectativaBtn">Mostrar Expectativa</button>
                 <button  id="mostrarSaboresBtn">Mostrar Sabores</button>
             </div>
-            <img class="grafico" id="graficoTelarana" src="tu-imagen-telarana.png" alt="Gráfico de Telaraña">
-            <img class="grafico" id="graficoPreguntaDos" src="tu-imagen-pregunta-dos.png" alt="Gráfico de Pregunta 2">
+            <img class="grafico" id="graficoTelarana" src="tu-imagen-telarana.png" alt="Gráfico de Textura">
             <img class="grafico" id="graficoChocolate" src="tu-imagen-chocolate.png" alt="Gráfico de Chocolate">
             <img class="grafico" id="graficoAtraccion" src="tu-imagen-atraccion.png" alt="Gráfico de Atracción">
             <img class="grafico" id="graficoExpectativa" src="tu-imagen-expectativa.png" alt="Gráfico de Expectativa">
@@ -165,14 +163,7 @@
                     imgElement.src = `data:image/png;base64,${imagenBase64}`;
                 })
                 .catch(error => console.error('Error:', error));
-            fetch('https://prueba-form-rho.vercel.app/graph/pregunta2') // grafico pregunta 2
-                .then(response => response.json())
-                .then(data => {
-                    const imagenBase64 = data.imagen_base64_barra_pregunta_dos;
-                    const imgElement = document.getElementById('graficoPreguntaDos');
-                    imgElement.src = `data:image/png;base64,${imagenBase64}`;
-                })
-                .catch(error => console.error('Error:', error));
+            
             fetch('https://prueba-form-rho.vercel.app/chocolate') // grafico pregunta 3
                 .then(response => response.json())
                 .then(data => {
@@ -207,7 +198,6 @@
                 .catch(error => console.error('Error:', error));
         }
     const telaranaBtn = document.getElementById('mostrarTelaranaBtn');
-    const preguntaDosBtn = document.getElementById('mostrarPreguntaDosBtn');
     const chocolateBtn = document.getElementById('mostrarChocolateBtn');
     const atraccionBtn = document.getElementById('mostrarAtraccionBtn');
     const expectativaBtn = document.getElementById('mostrarExpectativaBtn');
@@ -220,10 +210,6 @@
         document.getElementById('graficoTelarana').style.display = 'block';
     });
 
-    preguntaDosBtn.addEventListener('click', function() {
-        ocultarGraficos();
-        document.getElementById('graficoPreguntaDos').style.display = 'block';
-    });
 
     chocolateBtn.addEventListener('click', function() {
         ocultarGraficos();
