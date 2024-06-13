@@ -19,8 +19,14 @@
 .slider:hover {
     opacity: 1;
 }
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;  
+}
 .spanDerecha{
-  margin-left: 60%;
+  text-align: right;
 }
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -174,6 +180,11 @@
     .header img {
       max-width: 15%; /* Imagen un poco más grande */
     }
+    .spanDerecha {
+    margin-left: 0;
+    text-align: right;
+    flex: 1;
+  }
   }
     .container {
       width: calc(100% - 24px);
@@ -363,6 +374,7 @@
                 </label>
             </div>
             </div>
+        </div>
         <!-- Pregunta 7 -->
         <div class="question-container">
           <label for="question7" class="question">Pregunta 7:</label>
