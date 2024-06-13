@@ -11,10 +11,80 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/disenioFinalEncuesta.css">
     <title>Document</title>
 </head>
-</head>
+<style>
+    :root {
+        --fuente-principal: 'Manrope', sans-serif;
+      }
+      body {
+        font-family: var(--fuente-principal);
+      }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #333;
+        box-sizing:border-box;
+        background-image: url('https://www.shutterstock.com/image-vector/chocolate-chip-cookies-doodle-seamless-600nw-2279158739.jpg');
+    }
+    .container-header{
+        margin-left: 20px;
+        font-size: 1.3rem;
+        justify-content: flex-end;
+      }
+      .header {
+        margin-bottom: 0;
+        background-color: rgb(114, 59, 8);
+        width: 100%;
+        gap: 8px;
+        padding: 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+      }
+      .header img {
+        max-width: 11%;
+        height: auto;
+        
+      }
+    .thank-you-container {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    .thank-you-container h1 {
+        color: #212f3c;
+        margin-bottom: 20px;
+    }
+    .thank-you-container p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+    .thank-you-container .button {
+        margin-top: 20px;
+    }
+    .thank-you-container .button a {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #212f3c;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    .thank-you-container .button a:hover {
+        background-color: #1a242f;
+    }
+</style>
 <body>
 <div class="thank-you-container">
     <h1>¡Gracias por su Participación!</h1>
