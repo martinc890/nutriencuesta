@@ -9,13 +9,15 @@
     
     <section class="container"> 
         <header class="header">
-          <div class="company-name">Integrador InterCarrera</div>
+          <img src="/src/LogoGalletira.png" alt="OatChoc">
+              <div class="container-header">
+                  <h1></h1>
+              </div>
         </header>
         <form  method="post" action="/submit">  
         <h2 class="product-title">Producto #1</h2>
         <p class="product-description">
-          Descripcion del producto. <br />
-          Descripcion del test.
+          Galletas integrales de avena con chips de chocolate: Contienen harina de avena, chips de chocolate, banana, miel, aceite de oliva, levadura y ralladura de limón. <br />
         </p>
       
         <div class="question-container">
@@ -24,7 +26,7 @@
             <label>  </label>
             <div class="forms-grupos">
               <label><b>Edad</b></label>
-              <input type="number" name="birth_year" id="birthYear" placeholder="Ingrese su edad" required>
+              <input type="number" name="birth_year" id="birthYear" placeholder="Ingrese su edad" required min="0" max="120">
             </div>
             <div class="forms-grupos">
               <p><b>Género</b></p>
@@ -77,7 +79,7 @@
         <div class="question-container">
             <label for="question2" class="question">Pregunta 2:</label>
             <div class="forms-grupos">
-              <p><b>¿Sienten que la galletita se desase al comer?</b></p>
+              <p><b>¿Sienten que la galletita se deshase al comer?</b></p>
               <input type="range" class="slider" id="satisfactionRange" name="consistencia" min="1" max="5">
               <div class="d-flex justify-content-between">
                   <span>Nada</span>
