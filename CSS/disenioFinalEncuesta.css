@@ -1,5 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap%27%29%3B');
-@import url('https://fonts.googleapis.com/css2?family=Roboto%3Awght%40300&display=swap%27%29%3B');
+:root {
+    --fuente-principal: 'Manrope', sans-serif;
+  }
+  body {
+    font-family: var(--fuente-principal);
+  }
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -10,8 +14,29 @@ body {
     height: 100vh;
     color: #333;
     box-sizing:border-box;
-    background-image: url('https://img.freepik.com/vector-premium/fondo-transparente-galletas-galletas_6997-865.jpg');
+    background-image: url('https://www.shutterstock.com/image-vector/chocolate-chip-cookies-doodle-seamless-600nw-2279158739.jpg');
 }
+.container-header{
+    margin-left: 20px;
+    font-size: 1.3rem;
+    justify-content: flex-end;
+  }
+  .header {
+    margin-bottom: 0;
+    background-color: rgb(114, 59, 8);
+    width: 100%;
+    gap: 8px;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+  .header img {
+    max-width: 11%;
+    height: auto;
+    
+  }
 .thank-you-container {
     background-color: #fff;
     padding: 40px;
