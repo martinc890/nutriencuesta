@@ -1,17 +1,42 @@
+:root {
+    --fuente-principal: 'Manrope', sans-serif;
+  }
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--fuente-principal);
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;  /* Cambiado de height a min-height */
-    color: #333;
-    box-sizing: border-box;
-    background-image: url('https://img.freepik.com/vector-premium/fondo-transparente-galletas-galletas_6997-865.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;  /* Asegurar que la imagen no se repita */
+    height: 100vh;
+    margin: 0;
+    background-image: url('https://www.shutterstock.com/image-vector/chocolate-chip-cookies-doodle-seamless-600nw-2279158739.jpg');
 }
+
+.container-header{
+    margin-left: 20px;
+    font-size: 1.3rem;
+    font-family: "Open sans";
+    justify-content: flex-end;
+  }
+  .header {
+    margin-bottom: 0;
+    background-color: rgb(114, 59, 8);
+    width: 100%;
+    gap: 8px;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Open sans";
+    color: #fff;
+  }
+  .header img {
+    max-width: 11%;
+    height: auto;
+    
+  }
 
 .container {
     background: white;
@@ -28,7 +53,9 @@ h1 {
 }
 
 #results {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .image-pair {
@@ -38,8 +65,16 @@ h1 {
     margin-bottom: 20px;
 }
 
+.cont-resultados{
+    display: flex;
+    flex-direction: row!important;
+    justify-content: space-between;
+    align-items: start;
+}
+
 .grafico {
     margin: 10px;
+    margin-top: -40px; /*CUANDO HAGAN EL MEDIA PARA RESPONSIVE ESTE SAQUEN */
     width: calc(50% - 20px);  /* Ajuste del tamaño para un buen margen */
     border: 1px solid #ddd;
     background-color: white;
@@ -47,10 +82,32 @@ h1 {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
+    display: none;
 }
+
+.cont-botones{
+    display: flex;
+    flex-direction: column;
+}
+
+
 
 img {
     width: 100%;
     height: auto;
     display: block;
+}
+button {
+    background-color: rgb(114, 59, 8);
+    color: white;
+    margin-top: 1%;
+    padding: 10px 20px;
+    border: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkbrown;
 }

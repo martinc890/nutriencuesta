@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados de la encuesta</title>
+    <title>Resultados Encuesta</title>
     <link rel="stylesheet" href="/static/paginaResultados.css">
 </head>
+
 <body>
-    <div class="container">
-        <h1>Resultados de la encuesta</h1>
+    <section class="container"> 
+        <header class="header">
+            <img src="/src/LogoGalletira.png" alt="OatChoc">
+            <div class="container-header">
+                <h1></h1>
+            </div>
+        </header>
+        <h1>Resultados de la Encuesta</h1>
         <button onclick="downloadCSV()">Descargar Resultados en CSV</button>
         
         <script>
@@ -16,29 +23,32 @@
                 window.location.href = "/download_csv";
             }
         </script>
-        <div id="results">
-            <!-- Contenedores para mostrar los gráficos agrupados de a 2 -->
-            <div class="image-pair">
-                <img class="grafico" id="graficoPreguntaUno" src="" alt="Grafico Pregunta 1">
-                <img class="grafico" id="graficoPreguntaDos" src="" alt="Grafico de Pregunta 2">
+        <div id="results" class="cont-resultados">
+            <div class="cont-botones">
+                <button  id="mostrarTelaranaBtn">Mostrar Telaraña</button>
+                <button  id="mostrarPreguntaDosBtn">Mostrar Pregunta 2</button>
+                <button  id="mostrarChocolateBtn">Mostrar Chocolate</button>
+                <button id="mostrarAtraccionBtn">Mostrar Atracción</button>
+                <button  id="mostrarExpectativaBtn">Mostrar Expectativa</button>
+                <button  id="mostrarSaboresBtn">Mostrar Sabores</button>
             </div>
-            <div class="image-pair">
-                <img class="grafico" id="graficoChocolate" src="" alt="Grafico de Chocolate">
-                <img class="grafico" id="graficoAtraccion" src="" alt="Grafico de Atraccion">
-            </div>
-            <div class="image-pair">
-                <img class="grafico" id="graficoExpectativa" src="" alt="Grafico de Expectativa">
-                <img class="grafico" id="graficoSabores" src="" alt="Grafico de Sabores">
-            </div>
+            <img class="grafico" id="graficoTelarana" src="tu-imagen-telarana.png" alt="Gráfico de Telaraña">
+            <img class="grafico" id="graficoPreguntaDos" src="tu-imagen-pregunta-dos.png" alt="Gráfico de Pregunta 2">
+            <img class="grafico" id="graficoChocolate" src="tu-imagen-chocolate.png" alt="Gráfico de Chocolate">
+            <img class="grafico" id="graficoAtraccion" src="tu-imagen-atraccion.png" alt="Gráfico de Atracción">
+            <img class="grafico" id="graficoExpectativa" src="tu-imagen-expectativa.png" alt="Gráfico de Expectativa">
+            <img class="grafico" id="graficoSabores" src="tu-imagen-sabores.png" alt="Gráfico de Sabores">
+
         </div>
     </div>
+    </section>
     <script>
-        function actualizarImagen() {
+    function actualizarImagen() {
             fetch('https://prueba-form-rho.vercel.app/graph/pregunta1') // grafico pregunta 1
                 .then(response => response.json())
                 .then(data => {
                     const imagenBase64 = data.imagen_base64_barra_pregunta_uno;
-                    const imgElement = document.getElementById('graficoPreguntaUno');
+                    const imgElement = document.getElementById('graficoTelarana');
                     imgElement.src = `data:image/png;base64,${imagenBase64}`;
                 })
                 .catch(error => console.error('Error:', error));
@@ -83,9 +93,52 @@
                 })
                 .catch(error => console.error('Error:', error));
         }
+    const telaranaBtn = document.getElementById('mostrarTelaranaBtn');
+    const preguntaDosBtn = document.getElementById('mostrarPreguntaDosBtn');
+    const chocolateBtn = document.getElementById('mostrarChocolateBtn');
+    const atraccionBtn = document.getElementById('mostrarAtraccionBtn');
+    const expectativaBtn = document.getElementById('mostrarExpectativaBtn');
+    const saboresBtn = document.getElementById('mostrarSaboresBtn');
 
+    const graficos = document.querySelectorAll('.grafico');
+
+    telaranaBtn.addEventListener('click', function() {
+        ocultarGraficos();
+        document.getElementById('graficoTelarana').style.display = 'block';
+    });
+
+    preguntaDosBtn.addEventListener('click', function() {
+        ocultarGraficos();
+        document.getElementById('graficoPreguntaDos').style.display = 'block';
+    });
+
+    chocolateBtn.addEventListener('click', function() {
+        ocultarGraficos();
+        document.getElementById('graficoChocolate').style.display = 'block';
+    });
+
+    atraccionBtn.addEventListener('click', function() {
+        ocultarGraficos();
+        document.getElementById('graficoAtraccion').style.display = 'block';
+    });
+
+    expectativaBtn.addEventListener('click', function() {
+        ocultarGraficos();
+        document.getElementById('graficoExpectativa').style.display = 'block';
+    });
+
+    saboresBtn.addEventListener('click', function() {
+        ocultarGraficos();
+        document.getElementById('graficoSabores').style.display = 'block';
+    });
+
+    function ocultarGraficos() {
+        graficos.forEach(grafico => {
+            grafico.style.display = 'none';
+        });
+    }
         // Llama a la función para actualizar la imagen cada 8 segundos
-        setInterval(actualizarImagen, 8000); // 8000 milisegundos = 8 segundos
+        setInterval(actualizarImagen, 2000); // 8000 milisegundos = 8 segundos
     </script>
 </body>
 </html>
