@@ -70,7 +70,7 @@ async def read_form(
         with conn.cursor() as cursor:
             cursor.execute(query, valores)
             conn.commit()
-        conn.close()
+        
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     return Response(status_code=303, headers={"Location": "/finalEncuesta.html"})
