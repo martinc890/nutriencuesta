@@ -4,13 +4,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados Encuesta</title>
-    <link rel="stylesheet" href="/static/paginaResultados.css">
 </head>
-
+<style>
+    :root {
+        --fuente-principal: 'Manrope', sans-serif;
+      }
+    
+    body {
+        font-family: var(--fuente-principal);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-image: url('https://www.shutterstock.com/image-vector/chocolate-chip-cookies-doodle-seamless-600nw-2279158739.jpg');
+    }
+    
+    .container-header{
+        margin-left: 20px;
+        font-size: 1.3rem;
+        font-family: "Open sans";
+        justify-content: flex-end;
+      }
+      .header {
+        margin-bottom: 0;
+        background-color: rgb(114, 59, 8);
+        width: 100%;
+        gap: 8px;
+        padding: 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Open sans";
+        color: #fff;
+      }
+      .header img {
+        max-width: 11%;
+        height: auto;
+        
+      }
+    
+    .container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 1200px;  /* Ajustado a un ancho mayor */
+        overflow: hidden;  /* Asegurar que el contenido no se desborde */
+    }
+    
+    h1 {
+        text-align: center;
+    }
+    
+    #results {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .image-pair {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;  /* Ajustado para un espacio entre los elementos */
+        margin-bottom: 20px;
+    }
+    
+    .cont-resultados{
+        display: flex;
+        flex-direction: row!important;
+        justify-content: space-between;
+        align-items: start;
+    }
+    
+    .grafico {
+        margin: 10px;
+        margin-top: -40px; /*CUANDO HAGAN EL MEDIA PARA RESPONSIVE ESTE SAQUEN */
+        width: calc(50% - 20px);  /* Ajuste del tamaño para un buen margen */
+        border: 1px solid #ddd;
+        background-color: white;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        display: none;
+    }
+    
+    .cont-botones{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    
+    
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    button {
+        background-color: rgb(114, 59, 8);
+        color: white;
+        margin-top: 1%;
+        padding: 10px 20px;
+        border: none;
+        margin-top: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: darkbrown;
+    }
+</style>
 <body>
     <section class="container"> 
         <header class="header">
-            <img src="/src/LogoGalletira.png" alt="OatChoc">
+            <img src="../LogoGalletira.png" alt="OatChoc">
             <div class="container-header">
                 <h1></h1>
             </div>
