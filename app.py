@@ -271,7 +271,7 @@ def obtener_datos_atraccion():
 
 @app.get("/atraccion", response_class=JSONResponse)
 async def get_graph_atraccion(titulo: str= Query("Atraccion del Producto")):
-    fabrica=FabricaGraficos
+    fabrica=FabricaGraficos()
     grafico=fabrica.crear_grafico('torta')
     porcentajes_atraccion = obtener_datos_atraccion()
     imagen_torta_atraccion = grafico.generar(porcentajes_atraccion,titulo)
