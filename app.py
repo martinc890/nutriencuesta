@@ -1,6 +1,6 @@
 import os
 import tempfile
-from fastapi import FastAPI, Form, HTTPException, Response
+from fastapi import FastAPI, Form, HTTPException, Response,Query
 from fastapi.responses import HTMLResponse, JSONResponse,StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from matplotlib import pyplot as plt
@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import base64
 import csv
-
+from abc import ABC,abstractmethod
 
 app = FastAPI()
 app.add_middleware(
@@ -80,16 +80,40 @@ async def get_final_encuesta():
     with open(html_directorio_final, encoding="utf-8") as f:
         content = f.read()
     return HTMLResponse(content=content)
+#Empleo del patron Factory
+class Grafico (ABC):
+    @abstractmethod
+    def generar(self,data):
+        pass
 
-def generar_grafico_barras(respuestas,etiquetas):
-    fig, ax = plt.subplots()
-    ax.bar(etiquetas, respuestas.values())
-    ax.set_xlabel('Respuestas')
-    ax.set_ylabel('Cantidad')
-    ax.set_title('Textura')
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    return fig
+class GraficoBarras(Grafico):
+    def generar(self,data,titulo):
+        colores_marron = ['#D2B48C', '#A0522D', '#8B4513', '#563527']
+        fig, ax = plt.subplots()
+        ax.bar(data.keys(), data.values(),color=colores_marron)
+        ax.set_xlabel('Respuestas')
+        ax.set_ylabel('Cantidad')
+        ax.set_title(titulo)
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        return fig
+class GraficoTorta(Grafico):
+    def generar(self, data,titulo):
+        colores_marron = ['#D2B48C', '#A0522D', '#8B4513', '#563527', '#800000']
+        fig, ax = plt.subplots()
+        ax.pie(data.values(), labels=data.keys(), autopct='%1.1f%%', startangle=90,colors=colores_marron)
+        ax.axis('equal')
+        ax.set_title(titulo)
+        return fig
+class FabricaGraficos:
+    def crear_grafico(self, tipo):
+        if tipo == 'barras':
+            return GraficoBarras()
+        elif tipo == 'torta':
+            return GraficoTorta()
+        else:
+            raise ValueError(f"Tipo de gráfico '{tipo}' no es válido.")
+
 
 def obtener_datos_encuestas():
     query = "SELECT chocolate, atraccion, expectativa FROM encuestas"
@@ -137,11 +161,11 @@ def obtener_datos_pregunta1():
 
 
 @app.get("/graph/pregunta1", response_class=JSONResponse)
-async def get_graph_pregunta1():
+async def get_graph_pregunta1(titulo: str= Query("Textura")):
     respuestas = obtener_datos_pregunta1()
-    etiquetas = list(respuestas.keys())
-    imagen_barras = generar_grafico_barras(respuestas,etiquetas)
-    
+    fabrica=FabricaGraficos()
+    grafico=fabrica.crear_grafico('barras')
+    imagen_barras=grafico.generar(respuestas,titulo)
     with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
         imagen_barras.savefig(tmpfile.name, format="png")
 
@@ -167,27 +191,20 @@ def obtener_datos_pregunta2():
     # Imprimir los datos
     print("Respuestas de consistencia:", respuestas_consistencia)
     print("Total de respuestas:", total_respuestas)
-    
 
-
-   
     porcentajes_consistencia = {str(key): (value / total_respuestas) * 100 for key, value in respuestas_consistencia.items()}
     return porcentajes_consistencia
 
-def generar_grafico_torta_dos(porcentajes_consistencia):
-    fig, ax = plt.subplots()
-    ax.pie(porcentajes_consistencia.values(), labels=porcentajes_consistencia.keys(), autopct='%1.1f%%', startangle=90)
-    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    ax.set_title('Valoración de la consistencia')
-    return fig
 
 @app.get("/graph/pregunta2", response_class=JSONResponse)
-async def get_graph_pregunta2():
+async def get_graph_pregunta2(titulo: str= Query("Consistencia")):
+    fabrica=FabricaGraficos()
+    grafico=fabrica.crear_grafico('torta')
     porcentajes_consistencia = obtener_datos_pregunta2()
-    imagen_barras = generar_grafico_torta_dos(porcentajes_consistencia)
+    imagen_torta = grafico.generar(porcentajes_consistencia,titulo)
     
     with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
-        imagen_barras.savefig(tmpfile.name, format="png")
+        imagen_torta.savefig(tmpfile.name, format="png")
 
     with open(tmpfile.name, "rb") as image_file:
         imagen_base64_barra_pregunta_dos = base64.b64encode(image_file.read()).decode("utf-8")
@@ -216,17 +233,13 @@ def obtener_datos_chocolate():
     
     return porcentajes_chocolate
 
-def generar_grafico_torta_chocolate(porcentajes_chocolate):
-    fig, ax = plt.subplots()
-    ax.pie(porcentajes_chocolate.values(), labels=porcentajes_chocolate.keys(), autopct='%1.1f%%', startangle=90)
-    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    ax.set_title('Valoración del Chocolate')
-    return fig
 
 @app.get("/chocolate", response_class=JSONResponse)
-async def get_graph_chocolate():
+async def get_graph_chocolate(titulo: str= Query("Sabor a chocolate")):
+    fabrica=FabricaGraficos()
+    grafico=fabrica.crear_grafico('torta')
     porcentajes_chocolate = obtener_datos_chocolate()
-    imagen_torta_chocolate = generar_grafico_torta_chocolate(porcentajes_chocolate)
+    imagen_torta_chocolate = grafico.generar(porcentajes_chocolate,titulo)
     
     with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
         imagen_torta_chocolate.savefig(tmpfile.name, format="png")
@@ -256,17 +269,12 @@ def obtener_datos_atraccion():
     
     return porcentajes_atraccion
 
-def generar_grafico_torta_atraccion(porcentajes_atraccion):
-    fig, ax = plt.subplots()
-    ax.pie(porcentajes_atraccion.values(), labels=porcentajes_atraccion.keys(), autopct='%1.1f%%', startangle=90)
-    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    ax.set_title('Valoración de la atraccion')
-    return fig
-
 @app.get("/atraccion", response_class=JSONResponse)
-async def get_graph_atraccion():
+async def get_graph_atraccion(titulo: str= Query("Atraccion del Producto")):
+    fabrica=FabricaGraficos
+    grafico=fabrica.crear_grafico('torta')
     porcentajes_atraccion = obtener_datos_atraccion()
-    imagen_torta_atraccion = generar_grafico_torta_atraccion(porcentajes_atraccion)
+    imagen_torta_atraccion = grafico.generar(porcentajes_atraccion,titulo)
     
     with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
         imagen_torta_atraccion.savefig(tmpfile.name, format="png")
@@ -296,18 +304,12 @@ def obtener_datos_expectativa():
 
     return porcentajes_expectativa
 
-
-def generar_grafico_torta_expectativa(porcentajes_expectativa):
-    fig, ax = plt.subplots()
-    ax.pie(porcentajes_expectativa.values(), labels=porcentajes_expectativa.keys(), autopct='%1.1f%%', startangle=90)
-    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    ax.set_title('Valoración de las Expectativas')
-    return fig
-
 @app.get("/expectativa", response_class=JSONResponse)
-async def get_graph_expectativa():
+async def get_graph_expectativa(titulo: str= Query("Expectativa")):
+    fabrica=FabricaGraficos()
+    grafico=fabrica.crear_grafico('torta')
     porcentajes_expectativa = obtener_datos_expectativa()
-    imagen_torta_expectativa = generar_grafico_torta_expectativa(porcentajes_expectativa)
+    imagen_torta_expectativa = grafico.generar(porcentajes_expectativa,titulo)
     
     with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
         imagen_torta_expectativa.savefig(tmpfile.name, format="png")
@@ -332,21 +334,13 @@ def obtener_datos_pregunta7():
 
     return respuestas
 
-def generar_grafico_barras_sabores(respuestas,etiquetas):
-    fig, ax = plt.subplots()
-    ax.bar(etiquetas, respuestas.values())
-    ax.set_xlabel('Respuestas')
-    ax.set_ylabel('Cantidad')
-    ax.set_title('Respuestas a la Pregunta 7')
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    return fig
 
 @app.get("/graph/sabores", response_class=JSONResponse)
-async def get_graph_pregunta7():
+async def get_graph_pregunta7(titulo: str= Query("Sabores")):
+    fabrica=FabricaGraficos()
+    grafico=fabrica.crear_grafico('barras')
     respuestas = obtener_datos_pregunta7()
-    etiquetas = list(respuestas.keys())
-    imagen_barras = generar_grafico_barras_sabores(respuestas,etiquetas)
+    imagen_barras = grafico.generar(respuestas,titulo)
     
     with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
         imagen_barras.savefig(tmpfile.name, format="png")
