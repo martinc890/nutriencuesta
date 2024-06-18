@@ -116,8 +116,8 @@ class FabricaGraficos:
 
 
 def obtener_datos_encuestas():
-    query = "SELECT chocolate, atraccion, expectativa FROM encuestas"
-    categorias = ['chocolate', 'atraccion', 'expectativa']
+    query = "SELECT chocolate,consistencia, atraccion, expectativa FROM encuestas"
+    categorias = ['chocolate','consistencia', 'atraccion', 'expectativa']
     datos_encuestas = {categoria: [] for categoria in categorias}
 
     with conn.cursor() as cursor:
@@ -176,42 +176,8 @@ async def get_graph_pregunta1(titulo: str= Query("Textura")):
 
 #########################################################################################
 
-def obtener_datos_pregunta2():
-    query = "SELECT consistencia FROM encuestas"
-    total_respuestas = 0
-    respuestas_consistencia = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
-
-    with conn.cursor() as cursor:
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        for row in rows:
-            if row[0] in respuestas_consistencia:
-                respuestas_consistencia[row[0]] += 1
-                total_respuestas += 1
-    # Imprimir los datos
-    print("Respuestas de consistencia:", respuestas_consistencia)
-    print("Total de respuestas:", total_respuestas)
-
-    porcentajes_consistencia = {str(key): (value / total_respuestas) * 100 for key, value in respuestas_consistencia.items()}
-    return porcentajes_consistencia
 
 
-@app.get("/graph/pregunta2", response_class=JSONResponse)
-async def get_graph_pregunta2(titulo: str= Query("Consistencia")):
-    fabrica=FabricaGraficos()
-    grafico=fabrica.crear_grafico('torta')
-    porcentajes_consistencia = obtener_datos_pregunta2()
-    imagen_torta = grafico.generar(porcentajes_consistencia,titulo)
-    
-    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
-        imagen_torta.savefig(tmpfile.name, format="png")
-
-    with open(tmpfile.name, "rb") as image_file:
-        imagen_base64_barra_pregunta_dos = base64.b64encode(image_file.read()).decode("utf-8")
-
-    return {"imagen_base64_barra_pregunta_dos": imagen_base64_barra_pregunta_dos}
-
-#########################################################################################
 
 def obtener_datos_chocolate():
     query = "SELECT chocolate FROM encuestas"
